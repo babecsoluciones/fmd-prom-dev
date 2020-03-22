@@ -7,8 +7,16 @@
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team
     </author>
+    <preference name="phonegap-version" value="cli-7.0.1" />
     <content src="index.html" />
+    
+    <preference name="android-minSdkVersion"      value="14" />
+    <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
+    <preference name="android-targetSdkVersion"   value="28" />
+    <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
+    
     <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-camera" spec="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
