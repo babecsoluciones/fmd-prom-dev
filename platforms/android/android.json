@@ -39,11 +39,11 @@
   },
   "installed_plugins": {
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.example.hello"
+      "PACKAGE_NAME": "com.mobile.fussion"
     },
     "cordova-plugin-camera": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
-      "PACKAGE_NAME": "com.example.hello"
+      "PACKAGE_NAME": "com.mobile.fussion"
     }
   },
   "dependent_plugins": {},
