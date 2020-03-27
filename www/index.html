@@ -42,14 +42,15 @@
             function asignarImagen(codigo)
             {
                 navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
-                    destinationType: Camera.DestinationType.FILE_URL 
+                    destinationType: Camera.DestinationType.DATA_URL 
                 });
                 
                 // Change image source
             function onSuccess(imageData) {
+                var imagen = "data:image/jpeg;base64," + imageData;
                 var image = document.getElementById('img'+codigo);
-                image.src = imageData + '?' + Math.random();;
-                document.getElementById('srcImg'+codigo).value=imageData;
+                image.src = imagen;
+                document.getElementById('srcImg'+codigo).value=imagen;
             }
 
             function onFail(message) {
