@@ -38,15 +38,39 @@
             }
 
         });
+            
+            function asignarImagen(codigo)
+            {
+                navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
+                    destinationType: Camera.DestinationType.FILE_URL 
+                });
+                
+                // Change image source
+            function onSuccess(imageData) {
+                var image = document.getElementById('img'+codigo);
+                image.src = imageData + '?' + Math.random();;
+                document.getElementById('srcImg'+codigo).value=imageData;
+            }
+
+            function onFail(message) {
+                alert('Failed because: ' + message);
+            }
+            }
         </script>
     </head>
     <body>
         <div style="margin:0 auto; width:30%!important;text-align: center;">
             <img src="img/cam2.jpg" id='img' style="width: 150px; height: 150px;">
+            
         </div><br/>
         <div style="width:100%; text-align:center; padding:10px;">
             <button id='but_take'>Take photo</button>
             <button id='but_select'>Select photo from Gallery</button>
+            <button onclick="asignarImagen(1)">Take photo to 1</button>
         </div>
+        <div style="margin:0 auto; width:30%!important;text-align: center;">
+            <img src="img/cam2.jpg" id='img1' style="width: 150px; height: 150px;">
+            <textarea id="srcImg1"></textarea>
+        </div><br/>
     </body>
 </html>
