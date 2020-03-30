@@ -293,6 +293,7 @@ function guardarImagen(indice)
                 document.getElementById('imgArchivo'+indice).value=imagen;
                 indice++;
                 agregarFilaArchivo(indice);
+                window.location="index.html#upd-img";
             }
 
             function onFail(message) {
