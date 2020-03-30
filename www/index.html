@@ -2,7 +2,6 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src &apos;self&apos; data: gap: https://ssl.gstatic.com &apos;unsafe-eval&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos;; media-src *; img-src &apos;self&apos; data: content:;">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
@@ -12,6 +11,7 @@
     <!--cordova-->
     <script type="text/javascript" src="cordova.js"></script>
     <script type='text/javascript' src='jquery-3.0.0.js'></script>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script>
     <!--fontawesome-->
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css">
     <script type="text/javascript" src="fontawesome/js/all.js"></script>
@@ -59,8 +59,13 @@
                     <table>
                         <tr>
                             <td valign="top" nowrap="nowrap">Hoy tienes servicio en</td>
+                            
+                        </tr>
+                        <tr>
                             <td id="tdTienda8"></td>
                             <td id="tdSelector"></td>
+                        </tr>
+                        <tr>
                             <td>
                                 <button onclick="cerrarSesion()" class="btn btn-info form-control">Cerrar Sesi&oacute;n</button>
                             </td>
@@ -117,10 +122,9 @@
                                     <table width="100%" id="imagenes">
                                         <tr id="img0">
                                             <td>
-                                                <label for="tArchivo0" class="form-control btn btn-info">
+                                                <button class="form-control btn btn-info" onclick="guardarImagen('0')">
                                                     <i class="icono-menu fas fa-camera"></i> Tomar/subir Foto
-                                                </label>
-                                                <input type="file" id="tArchivo0" onchange="guardarImagen('0')" accept="image/*;capture=camera" capture="camera">
+                                                </button>
                                                 <input type="hidden" id="imgArchivo0" name="fotos[0][tArchivo]">
                                             </td>
                                         </tr>
@@ -375,8 +379,6 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script>
     <script type="text/javascript" id="jqm-trans-disable">
         /* For having a faster transition */
         $(document).on("mobileinit", function() {

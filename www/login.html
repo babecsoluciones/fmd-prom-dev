@@ -2,11 +2,9 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src &apos;self&apos; data: gap: https://ssl.gstatic.com &apos;unsafe-eval&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos;; media-src *; img-src &apos;self&apos; data: content:;">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="js/jquery-1.5.0.mobile.min.css">
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
     <!--cordova-->
@@ -50,7 +48,8 @@
             <div class="col-4">
                 <div class="card">
                     <div class="card-body">
-                        <form action="" autocomplete="off">
+                        <form action="" autocomplete="off" id="datos">
+                           <input type="hidden" id="accion" name="accion" value="inse-reg">
                             <div class="form-group">
                                 <label for="correo">Usuario</label>
                                             <input type="email" class="form-control" id="correo" placeholder="correo@ejemplo.com" required name="correo">
