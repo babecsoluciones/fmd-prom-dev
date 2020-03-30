@@ -2,7 +2,7 @@
 
 platform :ios, '10.0'
 
-target 'fussion' do
-	project 'fussion.xcodeproj'
+target 'fussionmd' do
+	project 'fussionmd.xcodeproj'
 
 end

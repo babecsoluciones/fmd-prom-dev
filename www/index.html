@@ -1,77 +1,401 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'" />
-        <title>PhoneGap app</title>
 
-        <!-- Script -->
-        <script type="text/javascript" src="cordova.js" ></script>
-        <script type='text/javascript' src='jquery-3.0.0.js' ></script>
-        <script type='text/javascript'>
-        $(document).ready(function(){
+<head>
+    <meta http-equiv="Content-Security-Policy" content="default-src &apos;self&apos; data: gap: https://ssl.gstatic.com &apos;unsafe-eval&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos;; media-src *; img-src &apos;self&apos; data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="js/jquery-1.5.0.mobile.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+    <!--cordova-->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type='text/javascript' src='jquery-3.0.0.js'></script>
+    <!--fontawesome-->
+    <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css">
+    <script type="text/javascript" src="fontawesome/js/all.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <!--serializador-->
+    <script type="text/javascript" src="js/jquery.serializejson.js"></script>
+    <script type="text/javascript" src="aplicacion.js"></script>
+    <!--estilos adiconales-->
+    <style>
+        /* For avoiding title truncation in wp8 */
+        
+        .ui-header .ui-title {
+            overflow: visible !important;
+        }
+        /* For fixing the absolute position issue for the default cordova gen page*/
+        
+        #cjp-accordion1 .app {
+            left: 5px !important;
+            margin: 5px !important;
+            position: relative !important;
+        }
+        
+        input[type="file"] {
+            display: none;
+        }
+        
+        .icono-menu {
+            font-size: 18px;
+        }
+    </style>
+    <title>Hello World</title>
+</head>
 
-            // Take photo from camera
-            $('#but_take').click(function(){
-                navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
-                    destinationType: Camera.DestinationType.FILE_URL 
-                });
-            });
-
-            // Select from gallery 
-            $("#but_select").click(function(){
-                navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY, 
-                    allowEdit: true,
-                    destinationType: Camera.DestinationType.FILE_URI
-                });
-            });
-
-            // Change image source
-            function onSuccess(imageData) {
-                var image = document.getElementById('img');
-                image.src = imageData + '?' + Math.random();;
-            }
-
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
-
-        });
-            
-            function asignarImagen(codigo)
-            {
-                navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
-                    destinationType: Camera.DestinationType.DATA_URL 
-                });
-                
-                // Change image source
-            function onSuccess(imageData) {
-                var imagen = "data:image/jpeg;base64," + imageData;
-                var image = document.getElementById('img'+codigo);
-                image.src = imagen;
-                document.getElementById('srcImg'+codigo).value=imagen;
-            }
-
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
-            }
-        </script>
-    </head>
-    <body>
-        <div style="margin:0 auto; width:30%!important;text-align: center;">
-            <img src="img/cam2.jpg" id='img' style="width: 150px; height: 150px;">
-            
-        </div><br/>
-        <div style="width:100%; text-align:center; padding:10px;">
-            <button id='but_take'>Take photo</button>
-            <button id='but_select'>Select photo from Gallery</button>
-            <button onclick="asignarImagen(1)">Take photo to 1</button>
+<body>
+    <!-- page 1 -->
+    <div data-role="page" id="home">
+        <div data-role="header">
+            <h1>Inicio</h1>
         </div>
-        <div style="margin:0 auto; width:30%!important;text-align: center;">
-            <img src="img/cam2.jpg" id='img1' style="width: 150px; height: 150px;">
-            <textarea id="srcImg1"></textarea>
-        </div><br/>
-    </body>
+
+        <div class="ui-content">
+            <div class="app">
+                <h1>Bienvenido <span id="tNombre"></span></h1>
+                <div class="blink">
+                    <table>
+                        <tr>
+                            <td valign="top" nowrap="nowrap">Hoy tienes servicio en</td>
+                            <td id="tdTienda8"></td>
+                            <td id="tdSelector"></td>
+                            <td>
+                                <button onclick="cerrarSesion()" class="btn btn-info form-control">Cerrar Sesi&oacute;n</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- end page 1 content -->
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" class="table-responsive">
+                <ul>
+                    <li><a href="#con-mov"><i class="icono-menu fas fa-list-alt"></i></a></li>
+                    <li><a href="#con-img"><i class="icono-menu far fa-images"></i></a></li>
+                    <li><a href="#home" class="ui-btn-active ui-state-persist"><i class="icono-menu fas fa-tachometer-alt"></i></a></li>
+                    <li><a href="#upd-img"><i class="icono-menu fas fa-camera"></i></a></li>
+                    <li><a href="#reg-mov"><i class="icono-menu fas fa-cart-plus"></i></a></li>
+                </ul>
+            </div>
+            <!-- /navbar -->
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /page1 -->
+    <!-- page 1 -->
+    <div data-role="page" id="upd-img">
+        <div data-role="header">
+            <h1>Subir Fotograf&iacute;as</h1>
+        </div>
+
+        <div class="ui-content">
+            <div>
+                <form id="datos-upd" name="datos" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="eCodPromotoria" id="eCodPromotoria0">
+                    <input type="hidden" name="accion" id="accion" value="img-prm">
+                    <input type="hidden" name="eCodUsuario" id="eCodUsuario1">
+                    <div class="col-lg-12">
+
+                        <div class="card col-lg-12">
+
+                            <div class="card-body card-block">
+                                <!--campos-->
+                                <div class="form-group">
+                                    <input type="button" class="btn btn-info" value="Subir" onclick="enviarDatos('-upd')">
+                                </div>
+                                <div class="form-group" id="tdTienda0">
+
+                                </div>
+                                <div class="form-group" id="tdTiposImagenes0">
+
+                                </div>
+                                <div class="form-group" style="overflow-y:scroll;">
+                                    <table width="100%" id="imagenes">
+                                        <tr id="img0">
+                                            <td>
+                                                <label for="tArchivo0" class="form-control btn btn-info">
+                                                    <i class="icono-menu fas fa-camera"></i> Tomar/subir Foto
+                                                </label>
+                                                <input type="file" id="tArchivo0" onchange="guardarImagen('0')" accept="image/*;capture=camera" capture="camera">
+                                                <input type="hidden" id="imgArchivo0" name="fotos[0][tArchivo]">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!--colocamos campos de arrastres-->
+
+                                <!--campos-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end page 1 content -->
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" class="table-responsive">
+                <ul>
+                    <li><a href="#con-mov"><i class="icono-menu fas fa-list-alt"></i></a></li>
+                    <li><a href="#con-img"><i class="icono-menu far fa-images"></i></a></li>
+                    <li><a href="#home"><i class="icono-menu fas fa-tachometer-alt"></i></a></li>
+                    <li><a href="#upd-img" class="ui-btn-active ui-state-persist"><i class="icono-menu fas fa-camera"></i></a></li>
+                    <li><a href="#reg-mov"><i class="icono-menu fas fa-cart-plus"></i></a></li>
+                </ul>
+            </div>
+            <!-- /navbar -->
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /page1 -->
+    <!-- page 1 -->
+    <div data-role="page" id="reg-mov">
+        <div data-role="header">
+            <h1>Registrar Arrastre</h1>
+        </div>
+
+        <div class="ui-content">
+            <div>
+                <form id="datos-arr" name="datos" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="eCodPromotoria" id="eCodPromotoria1">
+                    <input type="hidden" name="accion" id="accion" value="mov-prm">
+                    <input type="hidden" name="eCodUsuario" id="eCodUsuario2">
+                    <div class="col-lg-12">
+
+                        <div class="card col-lg-12">
+
+                            <div class="card-body card-block">
+                                <!--campos-->
+                                <div class="form-group">
+                                    <input type="button" class="btn btn-info" value="Registrar" onclick="enviarDatos('-arr')">
+                                </div>
+                                <div class="form-group" id="tdTienda1">
+
+                                </div>
+                                <div class="form-group" id="tdProductos1">
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Presentacion</label>
+                                    <select id="eCodPresentacion" name="eCodPresentacion" class="form-control" onchange="consultarArrastres()">
+                                        <option value="">Seleccione...</option>
+                                    </select>
+                                </div>
+
+                                <!--colocamos campos de arrastres-->
+                                <div class="form-group">
+                                    <label>Inv. Inicial</label>
+                                    <input type="text" class="form-control" id="eInicial" name="eInicial">
+                                </div>
+                                <div class="form-group">
+                                    <label>Resurtido</label>
+                                    <input type="text" class="form-control" id="eResurtido" name="eResurtido">
+                                </div>
+                                <div class="form-group">
+                                    <label>Inv. Final</label>
+                                    <input type="text" class="form-control" id="eFinal" name="eFinal">
+                                </div>
+                                <div class="form-group">
+                                    <label>Precio Venta</label>
+                                    <input type="text" class="form-control" id="dPrecioVenta" name="dPrecioVenta">
+                                    <br>
+                                    <small><i>Solo numeros con decimales. No se admiten signos de pesos</i></small>
+                                </div>
+                                <!--colocamos campos de arrastres-->
+
+                                <!--campos-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end page 1 content -->
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" class="table-responsive">
+                <ul>
+                    <li><a href="#con-mov"><i class="icono-menu fas fa-list-alt"></i></a></li>
+                    <li><a href="#con-img"><i class="icono-menu far fa-images"></i></a></li>
+                    <li><a href="#home"><i class="icono-menu fas fa-tachometer-alt"></i></a></li>
+                    <li><a href="#upd-img"><i class="icono-menu fas fa-camera"></i></a></li>
+                    <li><a href="#reg-mov" class="ui-btn-active ui-state-persist"><i class="icono-menu fas fa-cart-plus"></i></a></li>
+                </ul>
+            </div>
+            <!-- /navbar -->
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /page1 -->
+    <!-- page 1 -->
+    <div data-role="page" id="con-img">
+        <div data-role="header">
+            <h1>Consultar Fotos</h1>
+        </div>
+
+        <div class="ui-content">
+            <div>
+                <form id="datos-img" name="datos" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="eCodPromotoria" id="eCodPromotoria2">
+                    <input type="hidden" name="accion" id="accion" value="img-con">
+                    <input type="hidden" name="eCodUsuario" id="eCodUsuario4">
+                    <div class="col-lg-12">
+
+                        <div class="card col-lg-12">
+
+                            <div class="card-body card-block">
+                                <!--campos-->
+                                <div class="form-group">
+                                    <input type="button" class="btn btn-info" value="Registrar" onclick="enviarDatos('-img')">
+                                </div>
+                                <div class="form-group" id="tdTienda2">
+
+                                </div>
+                                <div class="form-group" id="divXHR">
+
+                                </div>
+                                <!--colocamos campos de arrastres-->
+
+                                <!--campos-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end page 1 content -->
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" class="table-responsive">
+                <ul>
+                    <li><a href="#con-mov"><i class="icono-menu fas fa-list-alt"></i></a></li>
+                    <li><a href="#con-img" class="ui-btn-active ui-state-persist"><i class="icono-menu far fa-images"></i></a></li>
+                    <li><a href="#home"><i class="icono-menu fas fa-tachometer-alt"></i></a></li>
+                    <li><a href="#upd-img"><i class="icono-menu fas fa-camera"></i></a></li>
+                    <li><a href="#reg-mov"><i class="icono-menu fas fa-cart-plus"></i></a></li>
+                </ul>
+            </div>
+            <!-- /navbar -->
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /page1 -->
+    <!-- page 1 -->
+    <div data-role="page" id="con-mov">
+        <div data-role="header">
+            <h1>Consultar Arrastres</h1>
+        </div>
+
+        <div class="ui-content">
+            <div>
+                <!--contenido-->
+                <form id="datos-con" name="datos" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="eCodPromotoria" id="eCodPromotoria3">
+                    <input type="hidden" name="accion" value="mov-con">
+                    <input type="hidden" name="eCodUsuario" id="eCodUsuario0">
+                    <div class="col-lg-12">
+
+                        <div class="card col-lg-12">
+
+                            <div class="card-body card-block">
+                                <!--campos-->
+                                <div class="form-group">
+                                    <input type="button" class="btn btn-info" value="Registrar" onclick="enviarDatos('-con')">
+                                </div>
+                                <div class="form-group" id="tdTienda4">
+
+                                </div>
+                                <div class="form-group table-responsive" id="divXHR" style="overflow-y: scroll;">
+
+                                </div>
+                                <!--colocamos campos de arrastres-->
+
+                                <!--campos-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!--contenido-->
+            </div>
+        </div>
+        <!-- end page 1 content -->
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" class="table-responsive">
+                <ul>
+                    <li><a href="#con-mov" class="ui-btn-active ui-state-persist"><i class="icono-menu fas fa-list-alt"></i></a></li>
+                    <li><a href="#con-img"><i class="icono-menu far fa-images"></i></a></li>
+                    <li><a href="#home"><i class="icono-menu fas fa-tachometer-alt"></i></a></li>
+                    <li><a href="#upd-img"><i class="icono-menu fas fa-camera"></i></a></li>
+                    <li><a href="#reg-mov"><i class="icono-menu fas fa-cart-plus"></i></a></li>
+                </ul>
+            </div>
+            <!-- /navbar -->
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /page1 -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="resExito" role="dialog">
+        <div class="modal-dialog">
+            <div class="alert alert-success">
+                <strong>&Eacute;xito!</strong> Registro Guardado Exitosamente
+            </div>
+
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="resError" role="dialog">
+        <div class="modal-dialog" id="divErrores">
+            <div class="alert alert-danger">
+                <strong>Error!</strong> Favor de validar la siguiente informaci&oacute;n
+            </div>
+
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modSelector" role="dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="frmSelector" name="frmSelector">
+                    <input type="hidden" name="accion" value="tie-con">
+                    <div class="form-group" id="bTienda">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Seleccionar" class="btn btn-info" onclick="cargarTienda()">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script>
+    <script type="text/javascript" id="jqm-trans-disable">
+        /* For having a faster transition */
+        $(document).on("mobileinit", function() {
+            $.mobile.defaultPageTransition = "none";
+            $.mobile.defaultDialogTransition = "none";
+        });
+    </script>
+    <script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script language="javascript">
+        $(document).ready(function() {
+            validarSesion();
+            cargarObjetos();
+            consultarDatos();
+            consultarArrastres();
+        });
+    </script>
+</body>
+
 </html>
