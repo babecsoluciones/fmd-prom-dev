@@ -303,7 +303,7 @@ function guardarImagen(indice)
 
 function agregarFilaArchivo(indice)
 {
-        var x = document.getElementById("imagenes").rows.length;
+      var x = document.getElementById("imagenes").rows.length;
         
         
         var eCodProducto = document.getElementById('imgArchivo'+indice);
@@ -315,7 +315,7 @@ function agregarFilaArchivo(indice)
     var table = document.getElementById("imagenes");
     var row = table.insertRow(x);
     row.id="img"+(indice);
-    row.innerHTML = '<label for="tArchivo'+indice+'" class="form-control btn btn-info"><i class="fas fa-camera"></i> Tomar/subir Foto</label><input type="file" id="tArchivo'+indice+'" onchange="guardarImagen(\''+indice+'\')" accept="image/*;capture=camera" capture="camera"><input type="hidden" id="imgArchivo'+indice+'" name="fotos['+indice+'][tArchivo]">';
+    row.innerHTML = '<button class="form-control btn btn-info" onclick="guardarImagen(\''+indice+'\')"><i class="fas fa-camera"></i> Tomar/subir Foto</button><input type="hidden" id="imgArchivo'+indice+'" name="fotos['+indice+'][tArchivo]">';
         }
         
     }
