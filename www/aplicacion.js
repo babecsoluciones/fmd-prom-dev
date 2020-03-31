@@ -178,7 +178,7 @@ function consultarArrastres()
           
           if(eCodProducto.value && eCodPresentacion.value)
               {
-                var obj = $('#datos').serializeJSON();
+                var obj = $('#datos-arr').serializeJSON();
                 var jsonString = JSON.stringify(obj);
                 
                 var eInicial = document.getElementById('eInicial');
