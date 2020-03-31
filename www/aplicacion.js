@@ -142,10 +142,10 @@ function cargarObjetos()
     
     if(localStorage.getItem("selector")==1)
         {
-            document.getElementById('frmSelector').style.display = 'inline';
+            document.getElementById('frmSel').hidden = false;
         }
     
-    cargarTienda();
+    
     
 }
 
