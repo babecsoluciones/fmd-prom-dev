@@ -295,6 +295,26 @@ function consultarDatos()
           });    
         }
 
+function consultarImagenes()
+{           
+            var obj = $('#datos-img').serializeJSON();
+          var jsonString = JSON.stringify(obj);
+          
+          $.ajax({
+              type: "POST",
+              url: "https://cors-anywhere.herokuapp.com/http://app.fussionmd.com/app/app-01-01.php",
+              data: jsonString,
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              success: function(data){
+                  document.getElementById('divXHRIMG').innerHTML = data.tHTML;
+              },
+              failure: function(errMsg) {
+                  alert('Error al enviar los datos.');
+              }
+          });    
+        }
+
 function guardarImagen(indice) 
 {
      navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
