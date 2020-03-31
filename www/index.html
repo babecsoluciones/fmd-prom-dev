@@ -12,11 +12,18 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type='text/javascript' src='jquery-3.0.0.js'></script>
     <script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script>
+    <!--scripts-->
+    <script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!--fontawesome-->
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css">
     <script type="text/javascript" src="fontawesome/js/all.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     <!--serializador-->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery.serializejson.js"></script>
     <script type="text/javascript" src="aplicacion.js"></script>
     <!--estilos adiconales-->
@@ -54,7 +61,10 @@
 
         <div class="ui-content">
             <div class="app">
+            
+               <br>
                 <h1>Bienvenido <span id="tNombre"></span></h1>
+                <br>
                 <div>
                     <table width="100%">
                         <tr>
@@ -64,6 +74,18 @@
                         <tr>
                             <td id="tdTienda8"></td>
                             <td id="tdSelector"></td>
+                        </tr>
+                        <tr hidden>
+                            <td colspan="2">
+                                <form id="frmSelector" name="frmSelector" style="display:none;">
+                    <input type="hidden" name="accion" value="tie-con">
+                    <div class="form-group" id="bTienda">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Seleccionar" class="btn btn-info" onclick="cargarTienda()">
+                    </div>
+                </form>
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -163,7 +185,7 @@
         </div>
 
         <div class="ui-content">
-            <div>
+            <div style="max-height:550px; overflow-y:scroll;">
                 <form id="datos-arr" name="datos" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="eCodPromotoria" id="eCodPromotoria1">
                     <input type="hidden" name="accion" id="accion" value="mov-prm">
@@ -308,12 +330,12 @@
                             <div class="card-body card-block">
                                 <!--campos-->
                                 <div class="form-group">
-                                    <input type="button" class="btn btn-info" value="Registrar" onclick="enviarDatos('-con')">
+                                    <input type="button" class="btn btn-info" value="Consultar" onclick="consultarDatos()">
                                 </div>
                                 <div class="form-group" id="tdTienda4">
 
                                 </div>
-                                <div class="form-group table-responsive" id="divXHR" style="overflow-y: scroll;">
+                                <div class="form-group table-responsive" id="divXHRCON" style="overflow-y: scroll;">
 
                                 </div>
                                 <!--colocamos campos de arrastres-->
@@ -362,22 +384,6 @@
 
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="modSelector" role="dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-body">
-                <form id="frmSelector" name="frmSelector">
-                    <input type="hidden" name="accion" value="tie-con">
-                    <div class="form-group" id="bTienda">
-                    </div>
-                    <div class="form-group">
-                        <input type="button" value="Seleccionar" class="btn btn-info" onclick="cargarTienda()">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <script type="text/javascript" id="jqm-trans-disable">
         /* For having a faster transition */
@@ -386,10 +392,7 @@
             $.mobile.defaultDialogTransition = "none";
         });
     </script>
-    <script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <script language="javascript">
         $(document).ready(function() {
             validarSesion();

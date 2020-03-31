@@ -111,14 +111,18 @@ function cargarObjetos()
     var cmbUsuario = document.querySelectorAll("[id^=eCodUsuario]");
     var cmbTienda = document.querySelectorAll("[id^=eCodUsuario]");
     var cmbProductos = document.querySelectorAll("[id^=tdProductos]");
+    var cmbPromotoria = document.querySelectorAll("[id^=eCodPromotoria]");
+    
     cmbUsuario.forEach(function(nodo){
        nodo.value = localStorage.getItem("codigousuario"); 
     });
-    document.getElementById('eCodUsuario').value = localStorage.getItem("codigousuario");
-    document.getElementById('eCodPromotoria').value = localStorage.getItem("codigopromotoria");
     
     cmbProductos.forEach(function(nodo){
        nodo.innerHTML = localStorage.getItem("productos");
+    });
+    
+    cmbPromotoria.forEach(function(nodo){
+       nodo.value = localStorage.getItem("codigopromotoria");
     });
     
     if(document.getElementById('bTienda'))
@@ -138,7 +142,7 @@ function cargarObjetos()
     
     if(localStorage.getItem("selector")==1)
         {
-            document.getElementById("tdSelector").innerHTML = '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modSelector">Cambiar Tienda</button>';
+            document.getElementById('frmSelector').style.display = 'inline';
         }
     
     cargarTienda();
@@ -240,18 +244,23 @@ function enviarDatos(codigo)
                   if(data.exito==1)
                   {
                       alert("Informacion almacenada exitosamente");
-                      setTimeout(function(){ window.location="index.html"; }, 500);
+                      setTimeout(function(){ 
+                          consultarDatos();
+                      }, 500);
                       
                   }
                   else
                       {
-                         
-                          var mensaje="";
+                         if(data.errores)
+                             {
+                                  var mensaje="";
                           for(var i=0;i<data.errores.length;i++)
                      {
                          mensaje += "-"+data.errores[i]+"\n";
                      }
                           alert("Error al procesar la solicitud.\n<-Valide la siguiente informacion->\n\n"+mensaje);
+                             }
+                         
                          
                       }
               },
@@ -263,7 +272,7 @@ function enviarDatos(codigo)
 
 function consultarDatos()
 {           
-            var obj = $('#datos').serializeJSON();
+            var obj = $('#datos-con').serializeJSON();
           var jsonString = JSON.stringify(obj);
           
           $.ajax({
@@ -273,7 +282,7 @@ function consultarDatos()
               contentType: "application/json; charset=utf-8",
               dataType: "json",
               success: function(data){
-                  document.getElementById('divXHR').innerHTML = data.tHTML;
+                  document.getElementById('divXHRCON').innerHTML = data.tHTML;
               },
               failure: function(errMsg) {
                   alert('Error al enviar los datos.');
@@ -327,6 +336,7 @@ function cargarTienda()
           var eCodTienda = document.getElementById('eCodTienda');
     if(eCodTienda.value>0)
         {
+           
           $.ajax({
               type: "POST",
               url: "https://cors-anywhere.herokuapp.com/http://app.fussionmd.com/app/app-01-01.php",
