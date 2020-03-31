@@ -112,7 +112,7 @@ function cargarObjetos()
     var cmbTienda = document.querySelectorAll("[id^=eCodUsuario]");
     var cmbProductos = document.querySelectorAll("[id^=tdProductos]");
     var cmbPromotoria = document.querySelectorAll("[id^=eCodPromotoria]");
-    var cmbImagenes = document.querySelectorAll("[id^=eCodPromotoria]");
+    var cmbImagenes = document.querySelectorAll("[id^=tdTiposImagenes]");
     
     cmbUsuario.forEach(function(nodo){
        nodo.value = localStorage.getItem("codigousuario"); 
