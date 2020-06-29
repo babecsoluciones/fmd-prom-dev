@@ -195,6 +195,10 @@ function consultarArrastres()
                             {
                                 eInicial.readOnly = true;
                             }
+                            else
+                            {
+                                eInicial.readOnly = false;
+                            }
                     },
                     failure: function(errMsg) {
                         alert('Error al enviar los datos.');
@@ -249,8 +253,10 @@ function enviarDatos(codigo)
                   if(data.exito==1)
                   {
                       alert("Informacion almacenada exitosamente");
+                      $('#datos'+codigo).trigger("reset");
                       setTimeout(function(){ 
                           consultarDatos();
+                          cargarObjetos();
                       }, 500);
                       
                   }

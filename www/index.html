@@ -126,6 +126,8 @@
                     <input type="hidden" name="eCodPromotoria" id="eCodPromotoria0">
                     <input type="hidden" name="accion" id="accion" value="img-prm">
                     <input type="hidden" name="eCodUsuario" id="eCodUsuario1">
+                    <input type="hidden" name="tLatitud" id="dLatitud1">
+                    <input type="hidden" name="tLongitud" id="dLongitud1">
                     <div class="col-lg-12">
 
                         <div class="card col-lg-12">
@@ -189,6 +191,8 @@
                     <input type="hidden" name="eCodPromotoria" id="eCodPromotoria1">
                     <input type="hidden" name="accion" id="accion" value="mov-prm">
                     <input type="hidden" name="eCodUsuario" id="eCodUsuario2">
+                    <input type="hidden" name="tLatitud" id="dLatitud2">
+                    <input type="hidden" name="tLongitud" id="dLongitud2">
                     <div class="col-lg-12">
 
                         <div class="card col-lg-12">
@@ -397,6 +401,42 @@
             consultarDatos();
             consultarArrastres();
         });
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        iniciarPosicion();
+    }
+
+    function iniciarPosicion(){
+        setInterval(function(){
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        },30000);
+    }
+    // onSuccess Geolocation
+    //
+    function onSuccess(position) {
+        var dLat = document.querySelectorAll('[id^=dLatitud]');
+        var dLng = document.querySelectorAll('[id^=dLongitud]');
+
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+
+        dLat.forEach(function(nodo){
+            nodo.value = lat;
+        });
+        dLng.forEach(function(nodo){
+            nodo.value = lng;
+        });
+    }
+
+    // onError Callback receives a PositionError object
+    //
+    function onError(error) {
+        alert('Error al obtener la posicion GPS: ' + error.message);
+    }
     </script>
 </body>
 

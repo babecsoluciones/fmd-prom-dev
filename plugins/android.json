@@ -13,6 +13,9 @@
     "cordova-plugin-camera": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.promotorias.fussion"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.promotorias.fussion"
     }
   },
   "dependent_plugins": {}
