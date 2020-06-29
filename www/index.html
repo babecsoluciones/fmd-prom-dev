@@ -26,6 +26,8 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery.serializejson.js"></script>
     <script type="text/javascript" src="aplicacion.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!--estilos adiconales-->
     <style>
         /* For avoiding title truncation in wp8 */
@@ -115,9 +117,9 @@
     <!-- /page1 -->
     <!-- page 1 -->
     <div data-role="page" id="upd-img">
-        <div data-role="header">
-            <h1>Subir Fotograf&iacute;as</h1>
+        <div data-role="header" data-position="fixed">
             <a href="#" class="ui-btn-right"  onclick="enviarDatos('-upd')"><i class="far fa-save"></i></a>
+            <h1>Subir Fotograf&iacute;as</h1>
         </div>
 
         <div class="ui-content">
@@ -180,13 +182,13 @@
     <!-- /page1 -->
     <!-- page 1 -->
     <div data-role="page" id="reg-mov">
-        <div data-role="header">
-            <h1>Registrar Arrastre</h1>
+        <div data-role="header" data-position="fixed">
             <a href="#" class="ui-btn-right"  onclick="enviarDatos('-arr')"><i class="far fa-save"></i></a>
+            <h1>Registrar Arrastre</h1>
         </div>
 
         <div class="ui-content">
-            <div style="max-height:550px; overflow-y:scroll;">
+            <div style="overflow-y:scroll;">
                 <form id="datos-arr" name="datos" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="eCodPromotoria" id="eCodPromotoria1">
                     <input type="hidden" name="accion" id="accion" value="mov-prm">
