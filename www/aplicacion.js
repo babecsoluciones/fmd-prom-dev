@@ -386,3 +386,32 @@ function cargarTienda()
           }); 
         }
 }
+
+function cargarGPS() {
+    navigator.geolocation.getCurrentPosition(onSuccessGPS, onErrorGPS);
+}
+
+// onSuccess Geolocation
+//
+function onSuccessGPS(position) {
+
+
+    var cmbLat = document.querySelectorAll("[id^=dLatitud]");
+    var cmbLng = document.querySelectorAll("[id^=dLongitud]");
+
+    cmbLat.forEach(function(nodo){
+        nodo.value = position.coords.latitude;
+    });
+
+    cmbLng.forEach(function(nodo){
+        nodo.value = position.coords.longitude;
+    });
+
+}
+
+// onError Callback receives a PositionError object
+//
+function onErrorGPS(error) {
+    alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+}

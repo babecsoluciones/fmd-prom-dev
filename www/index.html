@@ -402,6 +402,7 @@
             cargarTienda();
             consultarDatos();
             consultarArrastres();
+            cargarGPS();
         });
 
         
@@ -410,38 +411,11 @@
 
         // Wait for device API libraries to load
         //
-        document.addEventListener("deviceready", onDeviceReady, false);
+        document.addEventListener("deviceready", cargarGPS, false);
     
         // device APIs are available
         //
-        function onDeviceReady() {
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);
-        }
-    
-        // onSuccess Geolocation
-        //
-        function onSuccess(position) {
-
-
-            var cmbLat = document.querySelectorAll("[id^=dLatitud]");
-            var cmbLng = document.querySelectorAll("[id^=dLongitud]");
-
-            cmbLat.forEach(function(nodo){
-                nodo.value = position.coords.latitude;
-            });
-
-            cmbLng.forEach(function(nodo){
-                nodo.value = position.coords.longitude;
-            });
-
-        }
-    
-        // onError Callback receives a PositionError object
-        //
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' +
-                  'message: ' + error.message + '\n');
-        }
+        
     
         </script>
 </body>
