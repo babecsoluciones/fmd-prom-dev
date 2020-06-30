@@ -128,8 +128,8 @@
                     <input type="hidden" name="eCodPromotoria" id="eCodPromotoria0">
                     <input type="hidden" name="accion" id="accion" value="img-prm">
                     <input type="hidden" name="eCodUsuario" id="eCodUsuario1">
-                    <input type="hidden" name="tLatitud" id="dLatitud1">
-                    <input type="hidden" name="tLongitud" id="dLongitud1">
+                    <input type="hidden" name="tLatitud" id="dLatitud0">
+                    <input type="hidden" name="tLongitud" id="dLongitud0">
                     <div class="col-lg-12">
 
                         <div class="card col-lg-12">
@@ -193,8 +193,8 @@
                     <input type="hidden" name="eCodPromotoria" id="eCodPromotoria1">
                     <input type="hidden" name="accion" id="accion" value="mov-prm">
                     <input type="hidden" name="eCodUsuario" id="eCodUsuario2">
-                    <input type="hidden" name="tLatitud" id="dLatitud2">
-                    <input type="hidden" name="tLongitud" id="dLongitud2">
+                    <input type="hidden" name="tLatitud" id="dLatitud1">
+                    <input type="hidden" name="tLongitud" id="dLongitud1">
                     <div class="col-lg-12">
 
                         <div class="card col-lg-12">
@@ -423,8 +423,8 @@
         function onSuccess(position) {
 
 
-            var cmbLat = document.querySelectorAll("[id^=dLatitud");
-            var cmbLng = document.querySelectorAll("[id^=dLongitud");
+            var cmbLat = document.querySelectorAll("[id^=dLatitud]");
+            var cmbLng = document.querySelectorAll("[id^=dLongitud]");
 
             cmbLat.forEach(function(nodo){
                 nodo.value = position.coords.latitude;
