@@ -404,42 +404,46 @@
             consultarArrastres();
         });
 
-        document.addEventListener("deviceready", onDeviceReady, false);
-
-    // device APIs are available
-    //
-    function onDeviceReady() {
-        iniciarPosicion();
-    }
-
-    function iniciarPosicion(){
-        setInterval(function(){
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);
-        },30000);
-    }
-    // onSuccess Geolocation
-    //
-    function onSuccess(position) {
-        var dLat = document.querySelectorAll('[id^=dLatitud]');
-        var dLng = document.querySelectorAll('[id^=dLongitud]');
-
-        var lat = position.coords.latitude;
-        var lng = position.coords.longitude;
-
-        dLat.forEach(function(nodo){
-            nodo.value = lat;
-        });
-        dLng.forEach(function(nodo){
-            nodo.value = lng;
-        });
-    }
-
-    // onError Callback receives a PositionError object
-    //
-    function onError(error) {
-        alert('Error al obtener la posicion GPS: ' + error.message);
-    }
+        
     </script>
+    <script type="text/javascript" charset="utf-8">
+
+        // Wait for device API libraries to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+    
+        // device APIs are available
+        //
+        function onDeviceReady() {
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        }
+    
+        // onSuccess Geolocation
+        //
+        function onSuccess(position) {
+
+
+            var cmbLat = document.querySelectorAll("[id^=dLatitud");
+            var cmbLng = document.querySelectorAll("[id^=dLongitud");
+
+            cmbLat.forEach(function(nodo){
+                nodo.value = position.coords.latitude;
+            });
+
+            cmbLng.forEach(function(nodo){
+                nodo.value = position.coords.longitude;
+            });
+
+        }
+    
+        // onError Callback receives a PositionError object
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+        }
+    
+        </script>
 </body>
 
 </html>
