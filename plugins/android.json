@@ -16,6 +16,9 @@
     },
     "cordova-plugin-geolocation": {
       "PACKAGE_NAME": "com.promotorias.fussion"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.promotorias.fussion"
     }
   },
   "dependent_plugins": {}

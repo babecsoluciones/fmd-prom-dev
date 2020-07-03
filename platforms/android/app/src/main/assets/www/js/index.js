@@ -28,6 +28,9 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+        //this.geoPerm;
+        this.writeExt;
+        this.camPerm;
     },
 
     // Update DOM on a Received Event
@@ -40,7 +43,59 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+
+    //permisos
+    geoPerm: function () {
+        let perms = ["android.permission.ACCESS_COARSE_LOCATION",
+            "android.permission.ACCESS_FINE_LOCATION",
+            "android.permission.ACCESS_BACKGROUND_LOCATION"
+        ]
+        app.permissions.checkPermission("android.permission.ACCESS_COARSE_LOCATION", function (status) {
+            console.log('success checking permission');
+            console.log('HAS ACCESS_COURSE_LOCATION:', status.hasPermission);
+            if (!status.hasPermission) {
+                app.permissions.requestPermissions(perms, function (status) {
+                    console.log('success requesting ACCESS_*_LOCATION permission');
+                }, function (err) {
+                    console.log('failed to set permission');
+                });
+            }
+        }, function (err) {
+            console.log(err);
+        });
+    },
+    writeExt: function () {
+        app.permissions.checkPermission("android.permission.WRITE_EXTERNAL_STORAGE", function (status) {
+            console.log('success checking permission');
+            console.log('Has CAMERA:', status.hasPermission);
+            if (!status.hasPermission) {
+                app.permissions.requestPermission("android.permission.WRITE_EXTERNAL_STORAGE", function (status) {
+                    console.log('success requesting WRITE_EXTERNAL_STORAGE permission');
+                }, function (err) {
+                    console.log('failed to set permission');
+                });
+            }
+        }, function (err) {
+            console.log(err);
+        });
+    },
+    camPerm: function () {
+        app.permissions.checkPermission("android.permission.CAMERA", function (status) {
+            console.log('success checking permission');
+            console.log('Has CAMERA:', status.hasPermission);
+            if (!status.hasPermission) {
+                app.permissions.requestPermission("android.permission.CAMERA", function (status) {
+                    console.log('success requesting CAMERA permission');
+                }, function (err) {
+                    console.log('failed to set permission');
+                });
+            }
+        }, function (err) {
+            console.log(err);
+        });
     }
+    //fin permisos
 };
 
 app.initialize();
